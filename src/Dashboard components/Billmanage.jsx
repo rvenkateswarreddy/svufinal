@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import "./BillMange.css";
+import "./Billmange.css";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
