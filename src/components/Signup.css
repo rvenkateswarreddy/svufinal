@@ -17,16 +17,6 @@
 .admin-form {
   margin-right: 50px;
 }
-@media screen and (max-width: 600px) {
-  .neumorphic-container1 {
-    flex-direction: column;
-  }
-  .admin-form {
-    margin-top: 120px;
-    margin-left: 40px;
-    margin-right: 50px;
-  }
-}
 
 /* Signup.css */
 
@@ -98,7 +88,15 @@
 }
 @media only screen and (max-width: 600px) {
   .neumorphic-container1 {
-    margin-top: 60px;
-    height: 50vh;
+    flex-direction: column;
+  }
+  .admin-form,
+  .user-form {
+    width: 400px;
+    margin-left: 50px;
+    margin-right: 80px;
+  }
+  .admin-form {
+    margin-bottom: 40px;
   }
 }
