@@ -109,7 +109,7 @@ const Login = () => {
   return (
     <Container className="neumorphic-container1">
       <div className="neumorphic-form1 admin-form">
-        <h2 className="text-center">Admin Login</h2>
+        <h2 className="text-center">Warden Login</h2>
         <Form onSubmit={handleAdminLogin}>
           <Form.Group controlId="emailAdmin" className="form-group">
             <Form.Label className="label">Email:</Form.Label>
@@ -142,7 +142,7 @@ const Login = () => {
         </Form>
       </div>
       <div className="neumorphic-form1 user-form">
-        <h2 className="text-center">User Login</h2>
+        <h2 className="text-center">Student Login</h2>
         <Form onSubmit={handleUserLogin}>
           <Form.Group controlId="emailUser" className="form-group">
             <Form.Label className="label">Email:</Form.Label>

@@ -45,7 +45,7 @@ const Welcomeuser = ({ username, usertype }) => {
           {username}
         </span>
         , Welcome to{" "}
-        {usertype === "user" ? "User Dashboard!" : "Admin Dashboard!"}
+        {usertype === "user" ? "Student Dashboard!" : "Warden Dashboard!"}
       </p>
       <p className="usercontent">
         This is your personalized space where you can manage your profile and
