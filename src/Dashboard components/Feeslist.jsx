@@ -1,8 +1,13 @@
+// FeesList.js
+
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import "./FeesList.css"; // Import the CSS file
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import jsPDF from "jspdf";
+import "./FeesList.css";
+import "jspdf-autotable";
+
 const FeesList = () => {
   const [users, setUsers] = useState([]);
   const [editFormData, setEditFormData] = useState({
@@ -14,6 +19,7 @@ const FeesList = () => {
     noonVegCharge: "",
     roomCharge: "",
     totalAmount: "",
+    user: "",
   });
   const [isEditing, setIsEditing] = useState(false);
   const [editUserId, setEditUserId] = useState("");
@@ -42,7 +48,7 @@ const FeesList = () => {
   const handleEdit = (userId, messId) => {
     const user = users.find((user) => user._id === userId);
     const messDetail = user.hostelMess.find((mess) => mess._id === messId);
-    setEditFormData({ ...messDetail });
+    setEditFormData({ ...messDetail, user: user.fullname });
     setIsEditing(true);
     setEditUserId(userId);
     setEditMessId(messId);
@@ -91,6 +97,7 @@ const FeesList = () => {
           noonVegCharge: "",
           roomCharge: "",
           totalAmount: "",
+          user: "",
         });
       } else {
         toast.error("Error editing mess detail:", response.data.error);
@@ -132,6 +139,7 @@ const FeesList = () => {
       toast.error("Error removing mess detail:", error);
     }
   };
+
   const handleCancelEdit = () => {
     setIsEditing(false);
     setEditMessId("");
@@ -144,8 +152,52 @@ const FeesList = () => {
       noonVegCharge: "",
       roomCharge: "",
       totalAmount: "",
+      user: "",
     });
   };
+
+  const handlePrintBill = (messDetail, name) => {
+    console.log("messDetail.user:", messDetail.user);
+    const doc = new jsPDF();
+
+    // Add additional text before the table
+    doc.setFontSize(12); // Set font size to 12
+    doc.text("SVU Hostel", 70, 20);
+    doc.text("Phone: 823398430", 70, 30);
+    doc.text("Address: Tirupati, AP, India", 70, 40);
+
+    // Adjust startY to make space for additional text
+    const startY = 60;
+
+    const tableRows = [
+      ["User", name],
+      ["Days", messDetail.days],
+      ["Leave Days", messDetail.leaveDays],
+      ["Non-Veg Charge", `Rs ${messDetail.nonVegCharge}`],
+      ["Veg Charge", `Rs ${messDetail.vegCharge}`],
+      ["Total Food Charge", `Rs ${messDetail.totalFoodCharge}`],
+      ["Noon Veg Charge", `Rs ${messDetail.noonVegCharge}`],
+      ["Room Charge", `Rs ${messDetail.roomCharge}`],
+      ["Total Amount", `Rs ${messDetail.totalAmount}`],
+    ];
+
+    doc.autoTable({
+      startY: startY,
+      head: [["Description", "Amount"]],
+      body: tableRows,
+      theme: "striped",
+      styles: {
+        fontSize: 12,
+        cellPadding: 3,
+        textColor: [0, 0, 0],
+        fontStyle: "normal",
+        overflow: "linebreak",
+      },
+    });
+
+    doc.save("bill.pdf");
+  };
+
   return (
     <div className="wholefeeslist">
       <ToastContainer />
@@ -164,7 +216,8 @@ const FeesList = () => {
               <th>Noon Veg Charge</th>
               <th>Room Charge</th>
               <th>Total Amount</th>
-              <th>Operation</th> {/* Add operation column */}
+              <th>Print</th>
+              <th>Operation</th>
             </tr>
           </thead>
           <tbody>
@@ -181,6 +234,15 @@ const FeesList = () => {
                     <td>{user.hostelMess[0].noonVegCharge}</td>
                     <td>{user.hostelMess[0].roomCharge}</td>
                     <td>{user.hostelMess[0].totalAmount}</td>
+                    <td>
+                      <button
+                        onClick={() =>
+                          handlePrintBill(user.hostelMess[0], user.fullname)
+                        }
+                      >
+                        Print
+                      </button>
+                    </td>
                     <td>
                       <button
                         onClick={() =>
@@ -222,7 +284,8 @@ const FeesList = () => {
                       <th>Noon Veg Charge</th>
                       <th>Room Charge</th>
                       <th>Total Amount</th>
-                      <th>Operation</th> {/* Add operation column */}
+                      <th>Print</th>
+                      <th>Operation</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -239,12 +302,18 @@ const FeesList = () => {
                         <td>{mess.totalAmount}</td>
                         <td>
                           <button
+                            onClick={() => handlePrintBill(mess, user.fullname)}
+                          >
+                            Print
+                          </button>
+                        </td>
+                        <td>
+                          <button
                             onClick={() => handleEdit(user._id, mess._id)}
                           >
                             Edit
                           </button>
                           <button
-                            className="removered"
                             onClick={() => handleRemove(user._id, mess._id)}
                           >
                             Remove
@@ -262,8 +331,6 @@ const FeesList = () => {
         <div>
           <form className="formedit" onSubmit={handleEditFormSubmit}>
             <h3>Edit mess Details</h3>
-            <h3></h3>
-
             <div>
               <label htmlFor="days">Days:</label>
               <input
@@ -274,76 +341,7 @@ const FeesList = () => {
                 onChange={handleEditFormChange}
               />
             </div>
-            <div>
-              <label htmlFor="leaveDays">Leave Days:</label>
-              <input
-                type="text"
-                id="leaveDays"
-                name="leaveDays"
-                value={editFormData.leaveDays}
-                onChange={handleEditFormChange}
-              />
-            </div>
-            <div>
-              <label htmlFor="nonVegCharge">Non-Veg Charge:</label>
-              <input
-                type="text"
-                id="nonVegCharge"
-                name="nonVegCharge"
-                value={editFormData.nonVegCharge}
-                onChange={handleEditFormChange}
-              />
-            </div>
-            <div>
-              <label htmlFor="vegCharge">Veg Charge:</label>
-              <input
-                type="text"
-                id="vegCharge"
-                name="vegCharge"
-                value={editFormData.vegCharge}
-                onChange={handleEditFormChange}
-              />
-            </div>
-            <div>
-              <label htmlFor="totalFoodCharge">Total Food Charge:</label>
-              <input
-                type="text"
-                id="totalFoodCharge"
-                name="totalFoodCharge"
-                value={editFormData.totalFoodCharge}
-                onChange={handleEditFormChange}
-              />
-            </div>
-            <div>
-              <label htmlFor="noonVegCharge">Noon Veg Charge:</label>
-              <input
-                type="text"
-                id="noonVegCharge"
-                name="noonVegCharge"
-                value={editFormData.noonVegCharge}
-                onChange={handleEditFormChange}
-              />
-            </div>
-            <div>
-              <label htmlFor="roomCharge">Room Charge:</label>
-              <input
-                type="text"
-                id="roomCharge"
-                name="roomCharge"
-                value={editFormData.roomCharge}
-                onChange={handleEditFormChange}
-              />
-            </div>
-            <div>
-              <label htmlFor="totalAmount">Total Amount:</label>
-              <input
-                type="text"
-                id="totalAmount"
-                name="totalAmount"
-                value={editFormData.totalAmount}
-                onChange={handleEditFormChange}
-              />
-            </div>
+            {/* Add similar input fields for other properties */}
             <button type="submit">Save Changes</button>
             <button type="button" onClick={handleCancelEdit}>
               Cancel

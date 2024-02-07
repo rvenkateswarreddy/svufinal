@@ -1,4 +1,6 @@
-FeesList.css .neumorphic-table-fees {
+/* FeesList.css */
+
+.neumorphic-table-fees {
   width: 100%;
   border-collapse: collapse;
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
@@ -24,27 +26,6 @@ FeesList.css .neumorphic-table-fees {
 .neumorphic-table-fees tbody tr:hover {
   background-color: #e0e0e0;
 }
-
-.nested-table-fees {
-  width: 100%;
-  border-collapse: collapse;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.15);
-  border-radius: 10px;
-}
-
-.nested-table-fees td {
-  padding: 8px 10px;
-  background-color: #f0f0f0;
-}
-
-.nested-table-fees tbody tr:nth-child(odd) {
-  background-color: #f0f0f0;
-}
-
-.nested-table-fees tbody tr:hover {
-  background-color: #e0e0e0;
-}
-/* Add this CSS to FeesList.css */
 
 .formedit {
   position: fixed;
@@ -89,13 +70,8 @@ button {
 button:hover {
   background-color: #45a049;
 }
+
 .removered {
   background-color: red;
   color: white;
-}
-@media (max-width: 768px) {
-  .wholefeeslist {
-    width: 100%;
-    overflow-x: scroll;
-  }
 }
