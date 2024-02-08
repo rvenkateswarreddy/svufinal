@@ -341,7 +341,77 @@ const FeesList = () => {
                 onChange={handleEditFormChange}
               />
             </div>
-            {/* Add similar input fields for other properties */}
+            <div>
+              <label htmlFor="days">Leave days</label>
+              <input
+                type="text"
+                id="leaveDays"
+                name="leaveDays"
+                value={editFormData.leaveDays}
+                onChange={handleEditFormChange}
+              />
+            </div>
+            <div>
+              <label htmlFor="days">nonVegCharge</label>
+              <input
+                type="text"
+                id="days"
+                name="nonVegCharge"
+                value={editFormData.nonVegCharge}
+                onChange={handleEditFormChange}
+              />
+            </div>
+            <div>
+              <label htmlFor="days">vegCharge</label>
+              <input
+                type="text"
+                id="days"
+                name="vegCharge"
+                value={editFormData.vegCharge}
+                onChange={handleEditFormChange}
+              />
+            </div>
+            <div>
+              <label htmlFor="days">totalFoodCharge</label>
+              <input
+                type="text"
+                id="days"
+                name="totalFoodCharge"
+                value={editFormData.totalFoodCharge}
+                onChange={handleEditFormChange}
+              />
+            </div>
+            <div>
+              <label htmlFor="days">nonVegCharge</label>
+              <input
+                type="text"
+                id="days"
+                name="noonVegCharge"
+                value={editFormData.noonVegCharge}
+                onChange={handleEditFormChange}
+              />
+            </div>
+            <div>
+              <label htmlFor="days">roomCharge</label>
+              <input
+                type="text"
+                id="days"
+                name="roomCharge"
+                value={editFormData.roomCharge}
+                onChange={handleEditFormChange}
+              />
+            </div>
+            <div>
+              <label htmlFor="days">totalAmount</label>
+              <input
+                type="text"
+                id="days"
+                name="totalAmount"
+                value={editFormData.totalAmount}
+                onChange={handleEditFormChange}
+              />
+            </div>
+
             <button type="submit">Save Changes</button>
             <button type="button" onClick={handleCancelEdit}>
               Cancel
