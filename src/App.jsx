@@ -24,6 +24,7 @@ import AdminSuggestions from "./Dashboard components/AdminSuggestions";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Feeslist from "./Dashboard components/Feeslist";
+
 const App = () => {
   return (
     <>
@@ -67,6 +68,7 @@ const App = () => {
 
           <Route path="complaints" element={<Complaints />} />
           <Route path="adminbillgenerator" element={<BillGenerator />} />
+
           <Route path="messstatus" element={<MessStatus />} />
           <Route path="suggestions" element={<Suggestions />} />
         </Route>

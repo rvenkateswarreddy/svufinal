@@ -14,6 +14,7 @@ import "./Dashboard.css";
 import Welcomeuser from "./Welcomeuser";
 
 import axios from "axios";
+import Hostelpics from "../Dashboard components/Hostelpics";
 const Dashboard = () => {
   const [data, setdata] = useState({});
   const [sidebarActive, setSidebarActive] = useState(false);
@@ -144,6 +145,15 @@ const Dashboard = () => {
             </Nav.Item>
             <Nav.Item>
               <NavLink
+                to="/dashboard/hostelpics"
+                className="nav-link"
+                onClick={() => setSidebarActive(false)}
+              >
+                HOSTEL IMAGES
+              </NavLink>
+            </Nav.Item>
+            <Nav.Item>
+              <NavLink
                 to="/dashboard/messstatus"
                 className="nav-link"
                 onClick={() => setSidebarActive(false)}
@@ -182,6 +192,7 @@ const Dashboard = () => {
             {/* <Route path="messbill" element={<MessBill data={data} />} /> */}
             <Route path="complaints" element={<Complaints />} />
             <Route path="billgenerator" element={<BillGenerator />} />
+            <Route path="hostelpics" element={<Hostelpics />} />
             <Route path="messstatus" element={<MessStatus />} />
             <Route path="suggestions" element={<Suggestions />} />
           </Routes>
