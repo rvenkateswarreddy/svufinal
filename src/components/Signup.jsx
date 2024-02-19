@@ -6,6 +6,7 @@ import { Link, useNavigate } from "react-router-dom";
 import "./Signup.css"; // Import your custom styles if needed
 
 const Signup = () => {
+  const [textAdmin, settextAdmin] = useState(false);
   const [formData, setFormData] = useState({
     usertype: "user", // Default to "user"
     secretkey: "",
@@ -32,6 +33,7 @@ const Signup = () => {
 
   const handleSignup = async (e) => {
     e.preventDefault();
+    settextAdmin(true);
 
     try {
       // Implement signup logic using axios
@@ -45,6 +47,7 @@ const Signup = () => {
       console.error("Signup failed:", error);
       // You can handle errors and display an error message here
       alert("Registration failed. Please try again.");
+      settextAdmin(false);
     }
   };
 
@@ -264,7 +267,7 @@ const Signup = () => {
             type="submit"
             className="submit-button neumorphic-button mt-2"
           >
-            Signup
+            {textAdmin ? "processing" : "SIGNUP"}
           </Button>
         </Form>
         <p className="text-center ">
