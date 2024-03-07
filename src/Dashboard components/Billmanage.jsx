@@ -4,7 +4,7 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 const BillManage = () => {
-  const [selectedUserId, setSelectedUserId] = useState(""); // State to store the selected user ID
+  const [selectedUserId, setSelectedUserId] = useState("");
   const [formData, setFormData] = useState({
     days: "",
     leaveDays: "",
@@ -43,14 +43,28 @@ const BillManage = () => {
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
-    setFormData({
-      ...formData,
-      [name]: value,
-    });
+
+    let updatedFormData = { ...formData, [name]: value };
+
+    if (name === "nonVegCharge") {
+      updatedFormData.noonVegCharge = value * 25;
+    } else if (name === "vegCharge") {
+      updatedFormData.totalFoodCharge =
+        parseInt(updatedFormData.noonVegCharge) + parseInt(value * 60);
+    } else if (name === "roomCharge") {
+      updatedFormData.totalAmount =
+        parseFloat(updatedFormData.totalFoodCharge) + parseFloat(value);
+    } else if (name == "leaveDays" && name == "nonVegCharge") {
+      updatedFormData.vegCharge =
+        parseInt(updatedFormData.leaveDays) -
+        parseInt(updatedFormData.nonVegCharge);
+    }
+
+    setFormData(updatedFormData);
   };
 
   const handleSubmit = async (e) => {
-    e.preventDefault(); // Prevent default form submission behavior
+    e.preventDefault();
 
     try {
       const response = await fetch(
@@ -69,7 +83,6 @@ const BillManage = () => {
       }
 
       toast.success("Hostel mess details added successfully");
-      // Optionally, reset form data and selected user ID here
       setFormData({
         days: "",
         leaveDays: "",
@@ -95,7 +108,7 @@ const BillManage = () => {
           <label htmlFor="user">Select User:</label>
           <select
             id="user"
-            name="user"
+            name="selectedUserId"
             value={selectedUserId}
             onChange={(e) => setSelectedUserId(e.target.value)}
             required
@@ -109,7 +122,6 @@ const BillManage = () => {
           </select>
         </div>
 
-        {/* Input fields for mess details */}
         <div className="mess-details">
           <label htmlFor="days">Days:</label>
           <input
@@ -131,42 +143,12 @@ const BillManage = () => {
             required
           />
 
-          <label htmlFor="nonVegCharge">Non-Veg Charge:</label>
+          <label htmlFor="nonVegCharge">Non-Veg plates</label>
           <input
             type="number"
             id="nonVegCharge"
             name="nonVegCharge"
             value={formData.nonVegCharge}
-            onChange={handleInputChange}
-            required
-          />
-
-          <label htmlFor="vegCharge">Veg Charge:</label>
-          <input
-            type="number"
-            id="vegCharge"
-            name="vegCharge"
-            value={formData.vegCharge}
-            onChange={handleInputChange}
-            required
-          />
-
-          <label htmlFor="totalFoodCharge">Total Food Charge:</label>
-          <input
-            type="number"
-            id="totalFoodCharge"
-            name="totalFoodCharge"
-            value={formData.totalFoodCharge}
-            onChange={handleInputChange}
-            required
-          />
-
-          <label htmlFor="noonVegCharge">Non Veg Charge:</label>
-          <input
-            type="number"
-            id="noonVegCharge"
-            name="noonVegCharge"
-            value={formData.noonVegCharge}
             onChange={handleInputChange}
             required
           />
@@ -177,16 +159,6 @@ const BillManage = () => {
             id="roomCharge"
             name="roomCharge"
             value={formData.roomCharge}
-            onChange={handleInputChange}
-            required
-          />
-
-          <label htmlFor="totalAmount">Total Amount:</label>
-          <input
-            type="number"
-            id="totalAmount"
-            name="totalAmount"
-            value={formData.totalAmount}
             onChange={handleInputChange}
             required
           />

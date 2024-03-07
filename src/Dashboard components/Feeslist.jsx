@@ -210,10 +210,10 @@ const FeesList = () => {
               <th>User</th>
               <th>Days</th>
               <th>Leave Days</th>
-              <th>Non-Veg Charge</th>
-              <th>Veg Charge</th>
+              <th>Non-Veg plates</th>
+              <th>Veg plates</th>
               <th>Total Food Charge</th>
-              <th>Noon Veg Charge</th>
+              <th>Non Veg Charge</th>
               <th>Room Charge</th>
               <th>Total Amount</th>
               <th>Print</th>
@@ -278,10 +278,10 @@ const FeesList = () => {
                       <th>User</th>
                       <th>Days</th>
                       <th>Leave Days</th>
-                      <th>Non-Veg Charge</th>
-                      <th>Veg Charge</th>
+                      <th>Non-Veg plates</th>
+                      <th>Veg plates</th>
                       <th>Total Food Charge</th>
-                      <th>Noon Veg Charge</th>
+                      <th>Non Veg Charge</th>
                       <th>Room Charge</th>
                       <th>Total Amount</th>
                       <th>Print</th>
