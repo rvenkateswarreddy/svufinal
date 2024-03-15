@@ -68,7 +68,7 @@ const DashboardAdmin = () => {
   };
 
   return (
-    <Container fluid className="dashboard-container">
+    <Container-fluid className="dashboard-container">
       {/* Navbar */}
       <Navbar
         bg="dark"
@@ -196,7 +196,7 @@ const DashboardAdmin = () => {
           </Routes>
         </Col>
       </Row>
-    </Container>
+    </Container-fluid>
   );
 };
 
