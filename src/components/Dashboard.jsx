@@ -134,15 +134,7 @@ const Dashboard = () => {
                 Complaints
               </NavLink>
             </Nav.Item>
-            <Nav.Item>
-              <NavLink
-                to="/dashboard/billgenerator"
-                className="nav-link"
-                onClick={() => setSidebarActive(false)}
-              >
-                Bill Generator
-              </NavLink>
-            </Nav.Item>
+
             <Nav.Item>
               <NavLink
                 to="/dashboard/hostelpics"
@@ -191,7 +183,7 @@ const Dashboard = () => {
             <Route path="myprofile" element={<Myprofile data={data} />} />
             {/* <Route path="messbill" element={<MessBill data={data} />} /> */}
             <Route path="complaints" element={<Complaints />} />
-            <Route path="billgenerator" element={<BillGenerator />} />
+
             <Route path="hostelpics" element={<Hostelpics />} />
             <Route path="messstatus" element={<MessStatus />} />
             <Route path="suggestions" element={<Suggestions />} />
