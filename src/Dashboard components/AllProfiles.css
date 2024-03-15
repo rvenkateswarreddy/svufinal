@@ -30,27 +30,33 @@ body {
   padding: 10px;
   border-radius: 10px;
   margin-left: 8px;
-  margin-bottom: 30px;
-  overflow-x: auto; /* Enable horizontal scrolling */
-  width: 110%; /* Set to 100% to take up the full width */
+  overflow: auto;
+  width: 115%;
+  height: 550px;
+}
+.stickyheading {
+  position: sticky;
 }
 
 /* Normal Table Styles */
 .neumorphic-table {
+  position: relative;
   width: 100%;
   border-collapse: collapse;
-  margin-top: 10px;
+  /* margin-bottom: 30px; */
+  margin-top: -30px;
 }
 
 .neumorphic-table th {
   padding: 12px;
   text-align: left;
   background-color: #d3d4d9; /* Background color for table header */
-  border: 1px solid #000; /* Black border for table header */
+  border: 1px solid #000;
+  padding-top: 15px; /* Black border for table header */
 }
 
 .neumorphic-table td {
-  padding: 12px;
+  padding: 8px;
   border: 1px solid #000; /* Black border for table cells */
 }
 

@@ -44,7 +44,7 @@ const Login = () => {
       const userType = response.data.usertype; // Assuming the server returns the user's usertype
 
       if (userType === "admin") {
-        alert("Admin login successful");
+        alert("Warden login successful");
 
         navigate("/admindashboard");
         toast.success("Admin successfully logged in!");
@@ -85,7 +85,7 @@ const Login = () => {
       localStorage.setItem("token", token);
 
       if (userType === "user") {
-        alert("user login successful");
+        alert("Student login successful");
 
         navigate("/dashboard");
         toast.success("user successfully logged in!");

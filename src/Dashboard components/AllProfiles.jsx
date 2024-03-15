@@ -29,13 +29,12 @@ const AllProfiles = () => {
     user.fullname.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
-  const renderTable = (userData, title) => (
+  const renderTable = (userData) => (
     <div id="allprofiletablecontainer" className="tablewholecontainer">
-      <h2 style={{ marginTop: "10px" }}>{title}</h2>
       <div className="table-container ">
         <table className="neumorphic-table">
           <thead>
-            <tr>
+            <tr className="stickyheading">
               <th>User Type</th>
               <th>Full Name</th>
               <th>Email</th>
@@ -84,11 +83,6 @@ const AllProfiles = () => {
             ))}
           </tbody>
         </table>
-      </div>
-      <div>
-        <a className="back" href="#Backtop">
-          Back to top
-        </a>
       </div>
     </div>
   );
@@ -197,7 +191,7 @@ const AllProfiles = () => {
       {isLoading ? ( // Render loading indicator if isLoading is true
         <div className="redloading">Loading...</div>
       ) : (
-        renderTable(filteredUsers, "All Profiles")
+        renderTable(filteredUsers)
       )}
       <ToastContainer />
       {/* Floating Edit Form */}

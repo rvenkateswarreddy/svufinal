@@ -15,6 +15,7 @@ import Welcomeuser from "./Welcomeuser";
 
 import axios from "axios";
 import Hostelpics from "../Dashboard components/Hostelpics";
+import Hostelfees from "./Hostelfees";
 const Dashboard = () => {
   const [data, setdata] = useState({});
   const [sidebarActive, setSidebarActive] = useState(false);
@@ -40,6 +41,7 @@ const Dashboard = () => {
           course: res.data.mydata.course,
           yearOfStudy: res.data.mydata.yearOfStudy,
           admissionNumber: res.data.mydata.admissionNumber,
+          hostelMess: res.data.mydata.hostelMess,
         })
       )
 
@@ -134,6 +136,15 @@ const Dashboard = () => {
                 Complaints
               </NavLink>
             </Nav.Item>
+            <Nav.Item>
+              <NavLink
+                to="/dashboard/hostelmessfees"
+                className="nav-link"
+                onClick={() => setSidebarActive(false)}
+              >
+                MYHostelFee
+              </NavLink>
+            </Nav.Item>
 
             <Nav.Item>
               <NavLink
@@ -141,7 +152,7 @@ const Dashboard = () => {
                 className="nav-link"
                 onClick={() => setSidebarActive(false)}
               >
-                HOSTEL IMAGES
+                GALLERY
               </NavLink>
             </Nav.Item>
             <Nav.Item>
@@ -183,6 +194,7 @@ const Dashboard = () => {
             <Route path="myprofile" element={<Myprofile data={data} />} />
             {/* <Route path="messbill" element={<MessBill data={data} />} /> */}
             <Route path="complaints" element={<Complaints />} />
+            <Route path="hostelmessfees" element={<Hostelfees data={data} />} />
 
             <Route path="hostelpics" element={<Hostelpics />} />
             <Route path="messstatus" element={<MessStatus />} />
