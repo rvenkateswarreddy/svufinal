@@ -56,7 +56,7 @@ const Dashboard = () => {
   };
 
   return (
-    <Container fluid className="dashboard-container">
+    <Container-fluid className="dashboard-container">
       {/* Navbar */}
       <Navbar
         bg="dark"
@@ -198,7 +198,7 @@ const Dashboard = () => {
           </Routes>
         </Col>
       </Row>
-    </Container>
+    </Container-fluid>
   );
 };
 
