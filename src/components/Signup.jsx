@@ -267,7 +267,7 @@ const Signup = () => {
             type="submit"
             className="submit-button neumorphic-button mt-2"
           >
-            {textAdmin ? "processing" : "SIGNUP"}
+            {textAdmin ? "processing..." : "SIGNUP"}
           </Button>
         </Form>
         <p className="text-center ">

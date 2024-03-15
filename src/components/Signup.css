@@ -35,6 +35,10 @@
   min-height: 95vh;
   box-shadow: 20px 20px 60px #b8c4d6, -20px -20px 60px #ffffff;
 }
+.matter {
+  padding-left: 20px;
+  padding-bottom: 20px;
+}
 
 .signup-form {
   width: 80%;
