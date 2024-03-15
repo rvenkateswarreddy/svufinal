@@ -47,17 +47,15 @@ const BillManage = () => {
     let updatedFormData = { ...formData, [name]: value };
 
     if (name === "nonVegCharge") {
-      updatedFormData.noonVegCharge = value * 25;
+      updatedFormData.noonVegCharge = parseFloat(value) * 25; // Parse value as float
     } else if (name === "vegCharge") {
       updatedFormData.totalFoodCharge =
-        parseInt(updatedFormData.noonVegCharge) + parseInt(value * 60);
+        (parseFloat(updatedFormData.noonVegCharge) || 0) +
+        (parseFloat(value) || 0) * 60; // Parse values as float
     } else if (name === "roomCharge") {
       updatedFormData.totalAmount =
-        parseFloat(updatedFormData.totalFoodCharge) + parseFloat(value);
-    } else if (name == "leaveDays" && name == "nonVegCharge") {
-      updatedFormData.vegCharge =
-        parseInt(updatedFormData.leaveDays) -
-        parseInt(updatedFormData.nonVegCharge);
+        (parseFloat(updatedFormData.totalFoodCharge) || 0) +
+        parseFloat(value || 0); // Parse values as float
     }
 
     setFormData(updatedFormData);
@@ -149,6 +147,15 @@ const BillManage = () => {
             id="nonVegCharge"
             name="nonVegCharge"
             value={formData.nonVegCharge}
+            onChange={handleInputChange}
+            required
+          />
+          <label htmlFor="VegCharge">Veg plates</label>
+          <input
+            type="number"
+            id="vegCharge"
+            name="vegCharge"
+            value={formData.vegCharge}
             onChange={handleInputChange}
             required
           />
